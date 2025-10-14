@@ -3,6 +3,7 @@
 
 <hr class="my-2">
 
+<!-- TODO: Mirar porque esté if no funciona correctamente ya que el skeleton no lo veo nunca -->
 @if (pokemons()) {
   <pokemon-list [pokemons]="pokemons()" />
 }@else {
@@ -12,8 +13,19 @@
 
 <div class="flex justify-between">
 
-  <button class="mt-2" (click)="loadPokemons(-1)">Anteriores</button>
+  <button
+    [disabled]="currentPage() === 1"
+    [routerLink]="['/pokemons/page', currentPage()! - 1]"
+    class="mt-2"
+  >
+    Anteriores
+  </button>
 
-  <button class="mt-2" (click)="loadPokemons(+1)">Siguientes</button>
+  <button
+    [routerLink]="['/pokemons/page', currentPage()! + 1]"
+    class="mt-2"
+  >
+    Siguientes
+  </button>
 
 </div>
